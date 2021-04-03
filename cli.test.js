@@ -15,7 +15,7 @@ describe('create new project', () => {
 
 function cli(args, cwd) {
     return new Promise(resolve => {
-        exec(`node ${path.resolve('./p5js')} ${args.join(' ')}`,
+        exec(`node ${path.resolve('./cli')} ${args.join(' ')}`,
             { cwd },
             (error, stdout, stderr) => {
                 resolve({
