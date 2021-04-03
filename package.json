@@ -1,6 +1,6 @@
 {
     "name": "p5js",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "description": "A p5.js command line interface.",
     "main": "p5js.js",
     "bin": {
