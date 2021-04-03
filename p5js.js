@@ -11,7 +11,6 @@ program
     .action((project, options) => {
         const cwd = process.cwd()
         const dir = path.join(cwd, project)
-        console.log({ options })
         try {
             if (fs.existsSync(dir)) throw Error(`Error: directory "${project}" already exists!`)
             const template = path.join(__dirname, 'template')
