@@ -1,4 +1,4 @@
-name: Build and Publish
+name: Test and Publish
 
 on:
     release:
