@@ -2,12 +2,12 @@
     "name": "p5js",
     "version": "0.1.5",
     "description": "A p5.js command line interface.",
-    "main": "p5js.js",
+    "main": "cli.js",
     "bin": {
-        "p5js": "p5js.js"
+        "p5js": "cli.js"
     },
     "files": [
-        "p5js.js",
+        "cli.js",
         "template/",
         "LICENSE",
         "README.md",
@@ -16,7 +16,7 @@
     ],
     "scripts": {
         "test": "jest",
-        "start": "node p5js.js"
+        "start": "node cli.js"
     },
     "repository": {
         "type": "git",
