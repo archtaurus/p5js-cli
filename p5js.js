@@ -5,14 +5,14 @@ const { version, description } = require('./package.json')
 const { program } = require('commander')
 
 program
-    .command('new <project>')
-    .description('Create a new p5.js project.')
+    .command('new <sketch>')
+    .description('Create a new p5.js sketch.')
     .option('-d, --debug', 'Show debug infomation.', false)
-    .action((project, options) => {
+    .action((sketch, options) => {
         const cwd = process.cwd()
-        const dir = path.join(cwd, project)
+        const dir = path.join(cwd, sketch)
         try {
-            if (fs.existsSync(dir)) throw Error(`Error: directory "${project}" already exists!`)
+            if (fs.existsSync(dir)) throw Error(`Error: directory "${sketch}" already exists!`)
             const template = path.join(__dirname, 'template')
             fs.copySync(template, dir)
         } catch (error) {
