@@ -1,0 +1,48 @@
+{
+    "name": "p5js",
+    "version": "0.1.0",
+    "description": "A p5.js command line interface.",
+    "main": "p5js.js",
+    "bin": {
+        "p5js": "p5js.js"
+    },
+    "files": [
+        "p5js.js",
+        "template/",
+        "LICENSE",
+        "README.md",
+        "package.json",
+        "package-lock.json"
+    ],
+    "scripts": {
+        "test": "jest",
+        "start": "node p5js.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/archtaurus/p5js-cli.git"
+    },
+    "keywords": [
+        "p5.js",
+        "cli"
+    ],
+    "author": "Zhao Xin <7176466@qq.com> (https://www.haoohaoo.com/)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/archtaurus/p5js-cli/issues"
+    },
+    "homepage": "https://github.com/archtaurus/p5js-cli#readme",
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "commander": "^7.2.0",
+        "fs-extra": "^9.1.0",
+        "live-server": "^1.2.1"
+    },
+    "devDependencies": {
+        "jest": "^26.6.3",
+        "uuid": "^8.3.2"
+    },
+    "jest": {
+        "testEnvironment": "node"
+    }
+}
