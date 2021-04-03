@@ -17,6 +17,6 @@ npm i -g p5js
 
 ``` shell
 p5js new <sketch>
-cd <sketch>
-code . && p5js run
+cd <sketch> && code .
+p5js run
 ```
