@@ -1,6 +1,6 @@
 {
     "name": "p5js",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "description": "The p5.js CLI.",
     "main": "p5js-cli.js",
     "bin": {
