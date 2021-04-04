@@ -33,13 +33,23 @@ const startSketch = (sketchPath, options) => {
 }
 
 program
+    .command('list')
+    .description('List all your sketches.')
+    .action(() => {
+        fs.readdir(sketchesPath, (err, files) => {
+            console.log('All p5.js sketches in', sketchesPath, ':', files.length)
+            files.forEach((file) => console.log('🍀', file))
+        })
+    })
+
+program
     .command('new <sketch>')
-    .description('Create a new p5.js sketch in `~/Sketches` directory.')
-    .option('-r, --run', 'Serve it right after being created.')
+    .description('Create new p5.js sketch.')
+    .option('-s, --size <size>', 'p5.js canvas size WxH', '600x600')
+    .option('-r, --run', 'start coding and serving at once', false)
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
-    .option('-s, --size <size>', 'p5.js canvas size WxH', '600x600')
     .action((sketch, options) => {
         const sketchPath = path.join(sketchesPath, sketch)
         try {
@@ -106,11 +116,11 @@ function draw() {
 
 program
     .command('run <sketch>')
-    .description('Serve a sketch in your browser.')
+    .description('Serve an exsiting sketch.')
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
-    .option('-c, --code', 'Open sketch with VS code', false)
+    .option('-c, --code', 'open sketch with VS code', false)
     .action((sketch, options) => {
         const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
         if (options.code) require('child_process').exec(`code ${sketchPath} -g ${sketchPath}/sketch.js`)
@@ -118,22 +128,12 @@ program
     })
 
 program
-    .command('list')
-    .description('List all of your sketches.')
-    .action(() => {
-        fs.readdir(sketchesPath, (err, files) => {
-            console.log('All p5.js sketches in', sketchesPath, ':', files.length)
-            files.forEach((file) => console.log('🍀', file))
-        })
-    })
-
-program
     .command('code <sketch>')
     .description('Open sketch with VS code.')
+    .option('-r, --run', 'start serving and open your browser.', false)
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
-    .option('-r, --run', 'Open this sketch in your browser.', false)
     .action((sketch, options) => {
         const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
         try {
