@@ -108,7 +108,7 @@ program
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
     .action((sketch, options) => {
-        const sketchPath = sketch ? path.join(sketchesPath, sketch) : process.cwd()
+        const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
         startSketch(sketchPath, options)
     })
 
@@ -120,6 +120,20 @@ program
             console.log('All p5.js sketches in', sketchesPath, ':', files.length)
             files.forEach((file) => console.log('🍀', file))
         })
+    })
+
+program
+    .command('code <sketch>')
+    .description('Open sketch with VSCode.')
+    .action((sketch) => {
+        const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
+        try {
+            if (!fs.existsSync(sketchPath)) throw Error(`Error: Path "${sketchPath}" does not exist!`)
+            require('child_process').exec(`code ${sketchPath}`)
+        } catch (error) {
+            console.error(error.message)
+            process.exit(1)
+        }
     })
 
 program
