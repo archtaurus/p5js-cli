@@ -93,7 +93,10 @@ function draw() {
 }
 `)
             console.info(`Sketch ${chalk.blueBright(sketch)} created successfully!`)
-            if (options.run) startSketch(sketchPath, options)
+            if (options.run) {
+                require('child_process').exec(`code ${sketchPath} -g ${sketchPath}/sketch.js`)
+                startSketch(sketchPath, options)
+            }
             else console.info(`You may run ${chalk.greenBright(`p5js run ${sketch}`)} to serve it.`)
         } catch (error) {
             console.error(error.message)
@@ -107,8 +110,10 @@ program
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
+    .option('-c, --code', 'Open sketch in VS Code', false)
     .action((sketch, options) => {
         const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
+        if (options.code) require('child_process').exec(`code ${sketchPath} -g ${sketchPath}/sketch.js`)
         startSketch(sketchPath, options)
     })
 
@@ -129,7 +134,7 @@ program
         const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
         try {
             if (!fs.existsSync(sketchPath)) throw Error(`Error: Path "${sketchPath}" does not exist!`)
-            require('child_process').exec(`code ${sketchPath}`)
+            require('child_process').exec(`code ${sketchPath} -g ${sketchPath}/sketch.js`)
         } catch (error) {
             console.error(error.message)
             process.exit(1)
