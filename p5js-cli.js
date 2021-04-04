@@ -6,6 +6,8 @@ const chalk = require('chalk')
 const { program } = require('commander')
 const { version, description } = require('./package.json')
 const sketchesPath = process.env.NODE_ENV == 'test' ? '/tmp' : path.resolve(os.homedir(), 'Sketches')
+const p5jsPath = path.resolve(__dirname, 'p5.js')
+const faviconPath = path.resolve(p5jsPath, 'favicon.ico')
 
 const startSketch = (sketchPath, options) => {
     try {
@@ -19,8 +21,8 @@ const startSketch = (sketchPath, options) => {
             port: options.port || 8080,         // port number to serve. defaults to 8080.
             wait: options.wait || 100,          // milliseconds to wait for changes before reloading.
             mount: [
-                ['/favicon.ico', './p5.js/favicon.ico'],
-                ['/p5.js/', './p5.js/'],
+                ['/p5.js/', p5jsPath],
+                ['/favicon.ico', faviconPath],
             ],
         }
         liveServer.start(params)
