@@ -29,6 +29,12 @@ p5js new <sketch> --run
 p5js list
 ```
 
+🐝 Open sketch with VS Code.
+
+``` shell
+p5js code <sketch>
+```
+
 🐎 Serve an exsiting sketch.
 
 ``` shell
