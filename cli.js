@@ -31,12 +31,60 @@ program
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
+    .option('-s, --size <size>', 'p5.js canvas size WxH', '600x600')
     .action((sketch, options) => {
         const sketchPath = path.join(process.cwd(), sketch)
         try {
             if (fs.existsSync(sketchPath)) throw Error(`Error: directory "${sketch}" already exists!`)
+            if (options.size && !options.size.match(/\d+x\d+/)) throw Error(`Error: canvas size format is worng. `)
+            const [width, height] = options.size.split('x')
             const templatePath = path.join(__dirname, 'template')
             fs.copySync(templatePath, sketchPath)
+            fs.writeFileSync(path.join(sketchPath, 'index.html'), `<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>${sketch} - p5.js sketch</title>
+        <style>
+            * {
+                margin: 0px;
+                padding: 0px;
+                box-sizing: border-box;
+            }
+            body {
+                background-color: #777;
+            }
+            main {
+                width: 100vw;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            .p5Canvas {
+                border: 1px solid white;
+                box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <main></main>
+        <script src="p5.js/p5.min.js"></script>
+        <script src="p5.js/p5.sound.min.js"></script>
+        <script src="sketch.js"></script>
+    </body>
+</html>
+`)
+            fs.writeFileSync(path.join(sketchPath, 'sketch.js'), `function setup() {
+    createCanvas(${width}, ${height})
+}
+
+function draw() {
+    background(0)
+}
+`)
             console.info(`Sketch ${chalk.blueBright(sketch)} created successfully!`)
             if (options.run) startSketch(sketchPath, options)
             else console.info(`You may run ${chalk.greenBright(`p5js run ${sketch}`)} to serve it.`)

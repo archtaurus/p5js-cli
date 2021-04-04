@@ -1,6 +1,4 @@
-[![](https://p5js.org/assets/img/p5js.svg)](https://p5js.org)
-
-# A p5.js CLI
+# The p5.js CLI
 
 [![Build and Publish](https://github.com/archtaurus/p5js-cli/actions/workflows/publish.yml/badge.svg)](https://github.com/archtaurus/p5js-cli/actions/workflows/publish.yml)
 [![npm](https://img.shields.io/npm/v/p5js)](https://www.npmjs.com/package/p5js)
@@ -9,17 +7,17 @@
 [![Last Commit](https://img.shields.io/github/last-commit/archtaurus/p5js-cli)](https://github.com/archtaurus/p5js-cli)
 [![Download Total](https://img.shields.io/npm/dt/p5js)](https://www.npmjs.com/package/p5js)
 
-Whenever you got an idea, this p5.js CLI will help you creating a new p5.js sketch and serving it in your browser quickly and easily.
+This [p5.js](https://p5js.org) CLI helps you creating p5.js sketches and serving them in your browser quickly and easily.
 
-## Install
+## 🐙 Install
 
 ``` shell
 npm i -g p5js
 ```
 
-## Usage
+## 💡 Usage
 
-Create a new sketch in current directory
+Create a new sketch in current directory ✨
 
 ``` shell
 p5js new <sketch>
@@ -31,7 +29,7 @@ or your want to serve it right now
 p5js new <sketch> --run
 ```
 
-Serve an exsiting sketch in current directory
+Serve an exsiting sketch in current directory 🐎
 
 ``` shell
 cd <sketch>
@@ -43,3 +41,5 @@ or just run it from outside
 ``` shell
 p5js run <sketch>
 ```
+
+Now, edit `sketch.js` file to start your creation! 🎉
