@@ -42,6 +42,4 @@ or just run it from outside.
 p5js run <sketch>
 ```
 
-🎉 Congratulations! Now, edit `sketch.js` file in your sketch folder to show your creativity!
-
-And you may run `p5js --help` to discover more.
+🎉 Congratulations! Now, edit `sketch.js` file in your sketch folder to show your creativity! You may run `npm update -g p5js` to upgrade this CLI to the latest version and run `p5js --help` to discover more.
