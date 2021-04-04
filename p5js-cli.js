@@ -110,7 +110,7 @@ program
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
-    .option('-c, --code', 'Open sketch in VS Code', false)
+    .option('-c, --code', 'Open sketch with VS code', false)
     .action((sketch, options) => {
         const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
         if (options.code) require('child_process').exec(`code ${sketchPath} -g ${sketchPath}/sketch.js`)
@@ -129,12 +129,17 @@ program
 
 program
     .command('code <sketch>')
-    .description('Open sketch with VSCode.')
-    .action((sketch) => {
+    .description('Open sketch with VS code.')
+    .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
+    .option('-p, --port <port>', 'port number to serve', 8080)
+    .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
+    .option('-r, --run', 'Open this sketch in your browser.', false)
+    .action((sketch, options) => {
         const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
         try {
             if (!fs.existsSync(sketchPath)) throw Error(`Error: Path "${sketchPath}" does not exist!`)
             require('child_process').exec(`code ${sketchPath} -g ${sketchPath}/sketch.js`)
+            if (options.run) startSketch(sketchPath, options)
         } catch (error) {
             console.error(error.message)
             process.exit(1)
