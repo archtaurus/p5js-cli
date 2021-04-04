@@ -17,29 +17,31 @@ npm i -g p5js
 
 ## 💡 Usage
 
-Create a new sketch in current directory ✨
+✨ Create a new sketch in current directory.
 
 ``` shell
 p5js new <sketch>
 ```
 
-or your want to serve it right now
+or you want to serve it at once.
 
 ``` shell
 p5js new <sketch> --run
 ```
 
-Serve an exsiting sketch in current directory 🐎
+🐎 Serve an exsiting sketch in current directory.
 
 ``` shell
 cd <sketch>
 p5js run
 ```
 
-or just run it from outside
+or just run it from outside.
 
 ``` shell
 p5js run <sketch>
 ```
 
-Now, edit `sketch.js` file to start your creation! 🎉
+🎉 Congratulations! Now, edit `sketch.js` file in your sketch folder to show your creativity!
+
+And you may run `p5js --help` to discover more.
