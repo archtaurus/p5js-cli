@@ -2,7 +2,7 @@ const path = require('path')
 const exec = require('child_process').exec
 const sketchName = require('uuid').v4()
 
-describe('create new project', () => {
+describe('create new sketch', () => {
     test('create successfully.', async () => {
         const result = await cli(['new', sketchName], '/tmp')
         expect(result.code).toBe(0)

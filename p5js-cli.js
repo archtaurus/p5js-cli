@@ -5,7 +5,7 @@ const fs = require('fs')
 const chalk = require('chalk')
 const { program } = require('commander')
 const { version, description } = require('./package.json')
-const sketchesPath = path.resolve(os.homedir(), 'Sketches')
+const sketchesPath = process.env.NODE_ENV == 'test' ? '/tmp' : path.resolve(os.homedir(), 'Sketches')
 
 const startSketch = (sketchPath, options) => {
     try {
