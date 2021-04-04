@@ -89,7 +89,7 @@ program
 }
 
 function draw() {
-    background(0)
+    background(200)
 }
 `)
             console.info(`Sketch ${chalk.blueBright(sketch)} created successfully!`)
