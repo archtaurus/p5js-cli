@@ -78,8 +78,8 @@ program
     </head>
     <body>
         <main></main>
-        <script src="p5.js/p5.min.js"></script>
-        <script src="p5.js/p5.sound.min.js"></script>
+        <script src="/p5.js/p5.min.js"></script>
+        <!-- <script src="/p5.js/p5.sound.min.js"></script> -->
         <script src="sketch.js"></script>
     </body>
 </html>
