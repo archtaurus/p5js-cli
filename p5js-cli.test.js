@@ -7,7 +7,7 @@ describe('create new sketch', () => {
         const result = await cli(['new', sketchName], '/tmp')
         expect(result.code).toBe(0)
     })
-    test('failed when directory already exists.', async () => {
+    test('failed when exists.', async () => {
         const result = await cli(['new', sketchName], '/tmp')
         expect(result.code).toBe(1)
     })
