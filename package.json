@@ -2,13 +2,13 @@
     "name": "p5js",
     "version": "1.1.2",
     "description": "The p5.js CLI.",
-    "main": "cli.js",
+    "main": "p5js-cli.js",
     "bin": {
-        "p5js": "cli.js"
+        "p5js": "p5js-cli.js"
     },
     "files": [
-        "cli.js",
-        "template/",
+        "p5js-cli.js",
+        "p5.js/",
         "LICENSE",
         "README.md",
         "package.json",
@@ -16,7 +16,7 @@
     ],
     "scripts": {
         "test": "jest",
-        "start": "node cli.js"
+        "start": "node p5js-cli.js"
     },
     "repository": {
         "type": "git",
@@ -35,7 +35,6 @@
     "dependencies": {
         "chalk": "^4.1.0",
         "commander": "^7.2.0",
-        "fs-extra": "^9.1.0",
         "live-server": "^1.2.1"
     },
     "devDependencies": {

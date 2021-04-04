@@ -1,9 +1,11 @@
 #!/usr/bin/env node
+const os = require('os')
 const path = require('path')
-const fs = require('fs-extra')
+const fs = require('fs')
 const chalk = require('chalk')
 const { program } = require('commander')
 const { version, description } = require('./package.json')
+const sketchesPath = path.resolve(os.homedir(), 'Sketches')
 
 const startSketch = (sketchPath, options) => {
     try {
@@ -16,6 +18,10 @@ const startSketch = (sketchPath, options) => {
             host: options.host || "0.0.0.0",    // host name to serve. defaults to 0.0.0.0.
             port: options.port || 8080,         // port number to serve. defaults to 8080.
             wait: options.wait || 100,          // milliseconds to wait for changes before reloading.
+            mount: [
+                ['/favicon.ico', './p5.js/favicon.ico'],
+                ['/p5.js/', './p5.js/'],
+            ],
         }
         liveServer.start(params)
     } catch (error) {
@@ -26,20 +32,19 @@ const startSketch = (sketchPath, options) => {
 
 program
     .command('new <sketch>')
-    .description('Create a new p5.js sketch in current directory.')
+    .description('Create a new p5.js sketch in `~/Sketches` directory.')
     .option('-r, --run', 'Serve it right after being created.')
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
     .option('-s, --size <size>', 'p5.js canvas size WxH', '600x600')
     .action((sketch, options) => {
-        const sketchPath = path.join(process.cwd(), sketch)
+        const sketchPath = path.join(sketchesPath, sketch)
         try {
-            if (fs.existsSync(sketchPath)) throw Error(`Error: directory "${sketch}" already exists!`)
+            if (fs.existsSync(sketchPath)) throw Error(`Error: Sketch "${sketch}" already exists!`)
             if (options.size && !options.size.match(/\d+x\d+/)) throw Error(`Error: canvas size format is worng. `)
             const [width, height] = options.size.split('x')
-            const templatePath = path.join(__dirname, 'template')
-            fs.copySync(templatePath, sketchPath)
+            fs.mkdirSync(sketchPath)
             fs.writeFileSync(path.join(sketchPath, 'index.html'), `<!DOCTYPE html>
 <html>
     <head>
@@ -95,14 +100,24 @@ function draw() {
     })
 
 program
-    .command('run [sketch]')
-    .description('Serve the sketch or the current directory in your browser.')
+    .command('run <sketch>')
+    .description('Serve a sketch in your browser.')
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
     .action((sketch, options) => {
-        const sketchPath = sketch ? path.join(process.cwd(), sketch) : process.cwd()
+        const sketchPath = sketch ? path.join(sketchesPath, sketch) : process.cwd()
         startSketch(sketchPath, options)
+    })
+
+program
+    .command('list')
+    .description('List all of your sketches.')
+    .action(() => {
+        fs.readdir(sketchesPath, (err, files) => {
+            console.log('All p5.js sketches in', sketchesPath)
+            files.forEach((file) => console.log('🍀', file))
+        })
     })
 
 program

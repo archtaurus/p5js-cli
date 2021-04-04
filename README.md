@@ -7,7 +7,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/archtaurus/p5js-cli)](https://github.com/archtaurus/p5js-cli)
 [![Download Total](https://img.shields.io/npm/dt/p5js)](https://www.npmjs.com/package/p5js)
 
-This [p5.js](https://p5js.org) CLI helps you creating p5.js sketches and serving them in your browser quickly and easily.
+This [p5.js](https://p5js.org) CLI helps you creating p5.js sketches in `~/Sketches` directory and serving them in your browser quickly and easily.
 
 ## 🐙 Install
 
@@ -17,29 +17,22 @@ npm i -g p5js
 
 ## 💡 Usage
 
-✨ Create a new sketch in current directory.
-
-``` shell
-p5js new <sketch>
-```
-
-or you want to serve it at once.
+✨ Create a new sketch and serve it at once.
 
 ``` shell
 p5js new <sketch> --run
 ```
 
-🐎 Serve an exsiting sketch in current directory.
+🔍 List all your sketches.
 
 ``` shell
-cd <sketch>
-p5js run
+p5js list
 ```
 
-or just run it from outside.
+🐎 Serve an exsiting sketch.
 
 ``` shell
 p5js run <sketch>
 ```
 
-🎉 Congratulations! Now, edit `sketch.js` file in your sketch folder to show your creativity! You may run `npm update -g p5js` to upgrade this CLI to the latest version and run `p5js --help` to discover more.
+🎉 Congratulations! Now, edit the `sketch.js` file in your sketch folder to show your creativity! You may run `npm update -g p5js` to upgrade this CLI to the latest version and run `p5js --help` to discover more.
