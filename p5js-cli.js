@@ -47,6 +47,7 @@ program
     .description('Create new p5.js sketch.')
     .option('-s, --size <size>', 'p5.js canvas size WxH', '600x600')
     .option('-r, --run', 'start coding and serving at once', false)
+    .option('--webgl', 'use WEBGL', false)
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
     .option('-p, --port <port>', 'port number to serve', 8080)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
@@ -57,6 +58,7 @@ program
             if (options.size && !options.size.match(/\d+x\d+/)) throw Error(`Error: canvas size format is worng. `)
             const [width, height] = options.size.split('x')
             fs.mkdirSync(sketchPath)
+            const renderer = options.webgl ? 'WEBGL' : 'P2D'
             fs.writeFileSync(path.join(sketchPath, 'index.html'), `<!DOCTYPE html>
 <html>
     <head>
@@ -95,7 +97,7 @@ program
 </html>
 `)
             fs.writeFileSync(path.join(sketchPath, 'sketch.js'), `function setup() {
-    createCanvas(${width}, ${height})
+    createCanvas(${width}, ${height}, ${renderer})
 }
 
 function draw() {
