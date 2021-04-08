@@ -7,12 +7,8 @@
         "p5js": "p5js-cli.js"
     },
     "files": [
-        "p5js-cli.js",
         "p5.js/",
-        "LICENSE",
-        "README.md",
-        "package.json",
-        "package-lock.json"
+        "p5js-cli.js"
     ],
     "scripts": {
         "test": "jest",
