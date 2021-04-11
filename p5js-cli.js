@@ -57,7 +57,7 @@ program
             if (fs.existsSync(sketchPath)) throw Error(`Error: Sketch "${sketch}" already exists!`)
             if (options.size && !options.size.match(/\d+x\d+/)) throw Error(`Error: canvas size format is worng. `)
             const [width, height] = options.size.split('x')
-            fs.mkdirSync(sketchPath)
+            fs.mkdirSync(sketchPath, { recursive: true })
             const renderer = options.webgl ? 'WEBGL' : 'P2D'
             fs.writeFileSync(path.join(sketchPath, 'index.html'), `<!DOCTYPE html>
 <html>
