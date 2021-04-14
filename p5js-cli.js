@@ -18,7 +18,7 @@ const startSketch = (sketchPath, options) => {
             open: true,                         // when false, it won't load your browser by default.
             logLevel: 1,                        // 0 = errors only, 1 = some, 2 = lots
             host: options.host || "0.0.0.0",    // host name to serve. defaults to 0.0.0.0.
-            port: options.port || 8080,         // port number to serve. defaults to 8080.
+            port: options.port || 8000,         // port number to serve. defaults to 8000.
             wait: options.wait || 100,          // milliseconds to wait for changes before reloading.
             mount: [
                 ['/p5.js/', p5jsPath],
@@ -49,7 +49,7 @@ program
     .option('-r, --run', 'start coding and serving at once', false)
     .option('--webgl', 'use WEBGL', false)
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
-    .option('-p, --port <port>', 'port number to serve', 8080)
+    .option('-p, --port <port>', 'port number to serve', 8000)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
     .action((sketch, options) => {
         const sketchPath = path.join(sketchesPath, sketch)
@@ -120,7 +120,7 @@ program
     .command('run <sketch>')
     .description('Serve an exsiting sketch.')
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
-    .option('-p, --port <port>', 'port number to serve', 8080)
+    .option('-p, --port <port>', 'port number to serve', 8000)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
     .option('-c, --code', 'open sketch with VS code', false)
     .action((sketch, options) => {
@@ -134,7 +134,7 @@ program
     .description('Open sketch with VS code.')
     .option('-r, --run', 'start serving and open your browser.', false)
     .option('-h, --host <host>', 'host name to serve', '0.0.0.0')
-    .option('-p, --port <port>', 'port number to serve', 8080)
+    .option('-p, --port <port>', 'port number to serve', 8000)
     .option('-w, --wait <milliseconds>', 'milliseconds to wait for changes before reloading', 100)
     .action((sketch, options) => {
         const sketchPath = sketch === '.' ? process.cwd() : path.join(sketchesPath, sketch)
