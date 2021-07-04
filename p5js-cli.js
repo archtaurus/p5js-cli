@@ -37,8 +37,10 @@ program
     .description('List all your sketches.')
     .action(() => {
         fs.readdir(sketchesPath, (err, files) => {
-            console.log('All p5.js sketches in', sketchesPath, ':', files.length || 0)
-            files.forEach((file) => console.log('🍀', file))
+            if (files) {
+                console.log('All p5.js sketches in', sketchesPath, ':', files.length)
+                files.forEach((file) => console.log('🍀', file))
+            } else console.log('No p5.js sketches in', sketchesPath)
         })
     })
 
