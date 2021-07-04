@@ -12,14 +12,14 @@ const faviconPath = path.resolve(p5jsPath, 'favicon.ico')
 const startSketch = (sketchPath, options) => {
     try {
         if (!fs.existsSync(sketchPath)) throw Error(`Error: Path "${sketchPath}" does not exist!`)
-        const liveServer = require("live-server")
+        const liveServer = require('live-server')
         const params = {
-            root: sketchPath || process.cwd(),    // defaults to cwd.
-            open: true,                         // when false, it won't load your browser by default.
-            logLevel: 1,                        // 0 = errors only, 1 = some, 2 = lots
-            host: options.host || "0.0.0.0",    // host name to serve. defaults to 0.0.0.0.
-            port: options.port || 8000,         // port number to serve. defaults to 8000.
-            wait: options.wait || 100,          // milliseconds to wait for changes before reloading.
+            root: sketchPath || process.cwd(), // defaults to cwd.
+            open: true, // when false, it won't load your browser by default.
+            logLevel: 1, // 0 = errors only, 1 = some, 2 = lots
+            host: options.host || '0.0.0.0', // host name to serve. defaults to 0.0.0.0.
+            port: options.port || 8000, // port number to serve. defaults to 8000.
+            wait: options.wait || 100, // milliseconds to wait for changes before reloading.
             mount: [
                 ['/p5.js/', p5jsPath],
                 ['/favicon.ico', faviconPath],
@@ -37,7 +37,7 @@ program
     .description('List all your sketches.')
     .action(() => {
         fs.readdir(sketchesPath, (err, files) => {
-            console.log('All p5.js sketches in', sketchesPath, ':', files.length)
+            console.log('All p5.js sketches in', sketchesPath, ':', files.length || 0)
             files.forEach((file) => console.log('🍀', file))
         })
     })
@@ -59,7 +59,9 @@ program
             const [width, height] = options.size.split('x')
             fs.mkdirSync(sketchPath, { recursive: true })
             const renderer = options.webgl ? 'WEBGL' : 'P2D'
-            fs.writeFileSync(path.join(sketchPath, 'index.html'), `<!DOCTYPE html>
+            fs.writeFileSync(
+                path.join(sketchPath, 'index.html'),
+                `<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -95,21 +97,24 @@ program
         <script src="sketch.js"></script>
     </body>
 </html>
-`)
-            fs.writeFileSync(path.join(sketchPath, 'sketch.js'), `function setup() {
+`
+            )
+            fs.writeFileSync(
+                path.join(sketchPath, 'sketch.js'),
+                `function setup() {
     createCanvas(${width}, ${height}, ${renderer})
 }
 
 function draw() {
     background(200)
 }
-`)
+`
+            )
             console.info(`Sketch ${chalk.blueBright(sketch)} created successfully!`)
             if (options.run) {
                 require('child_process').exec(`code ${sketchPath} -g ${sketchPath}/sketch.js`)
                 startSketch(sketchPath, options)
-            }
-            else console.info(`You may run ${chalk.greenBright(`p5js run ${sketch}`)} to serve it.`)
+            } else console.info(`You may run ${chalk.greenBright(`p5js run ${sketch}`)} to serve it.`)
         } catch (error) {
             console.error(error.message)
             process.exit(1)
@@ -148,7 +153,4 @@ program
         }
     })
 
-program
-    .version(version)
-    .description(description)
-    .parse(process.argv)
+program.version(version).description(description).parse(process.argv)

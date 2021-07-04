@@ -31,7 +31,7 @@
     "dependencies": {
         "chalk": "^4.1.0",
         "commander": "^7.2.0",
-        "live-server": "^1.2.1"
+        "live-server": "^1.1.0"
     },
     "devDependencies": {
         "jest": "^26.6.3",
