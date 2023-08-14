@@ -4,11 +4,11 @@ const sketchName = require('uuid').v4()
 
 describe('create new sketch', () => {
     test('create successfully.', async () => {
-        const result = await cli(['new', sketchName], '/tmp')
+        const result = await cli(['new', sketchName], '.')
         expect(result.code).toBe(0)
     })
     test('failed when exists.', async () => {
-        const result = await cli(['new', sketchName], '/tmp')
+        const result = await cli(['new', sketchName], '.')
         expect(result.code).toBe(1)
     })
 })
